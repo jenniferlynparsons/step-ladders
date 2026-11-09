@@ -1,0 +1,176 @@
+[
+  {
+    "schemaVersion": 1,
+    "id": "gentle-walking-demo",
+    "title": "Gentle Walking & Coordination (Example)",
+    "description": "Illustrative walking-in-place and stepping routine for trying out the player. Not a transcription of the source video.",
+    "sourceUrl": "https://www.instagram.com/p/DfUsKrSRIWT/",
+    "notes": "EXAMPLE ONLY. Movements are a draft based on the general theme (walking and coordination) of the linked video. Exercise order, names, cues and every duration are unverified guesses. Check against the source video and edit before relying on it.",
+    "exercises": [
+      {
+        "id": "marching",
+        "name": "March in Place",
+        "instructions": "Stand tall and march in place at an easy pace, arms swinging naturally.",
+        "phases": [
+          {
+            "id": "marching-work",
+            "type": "work",
+            "label": "March",
+            "durationSeconds": 45,
+            "speech": "Start marching in place at a comfortable pace. Let your arms swing."
+          }
+        ]
+      },
+      {
+        "id": "heel-toe",
+        "name": "Heel and Toe Taps",
+        "instructions": "Alternate tapping a heel forward and a toe back, switching sides.",
+        "phases": [
+          {
+            "id": "heel-taps",
+            "type": "work",
+            "label": "Heel taps forward",
+            "durationSeconds": 30,
+            "speech": "Tap one heel forward, then the other. Keep a steady rhythm."
+          },
+          {
+            "id": "toe-taps",
+            "type": "work",
+            "label": "Toe taps back",
+            "durationSeconds": 30,
+            "speech": "Now tap your toes behind you, alternating sides."
+          },
+          {
+            "id": "heel-toe-rest",
+            "type": "rest",
+            "label": "Rest",
+            "durationSeconds": 15,
+            "speech": "Rest. Walk gently in place and breathe."
+          }
+        ]
+      },
+      {
+        "id": "step-pattern",
+        "name": "Step Pattern",
+        "instructions": "Practice a coordinated stepping pattern: step out, step out, step in, step in.",
+        "phases": [
+          {
+            "id": "step-first",
+            "type": "work",
+            "label": "Out, out, in, in",
+            "durationSeconds": 30,
+            "speech": "Step right foot out, left foot out, right foot in, left foot in. Repeat."
+          },
+          {
+            "id": "step-switch",
+            "type": "transition",
+            "label": "Switch lead foot",
+            "durationSeconds": 5,
+            "speech": "Switch to lead with your left foot."
+          },
+          {
+            "id": "step-second",
+            "type": "work",
+            "label": "Left lead",
+            "durationSeconds": 30,
+            "speech": "Left foot out, right foot out, left foot in, right foot in. Repeat."
+          },
+          {
+            "id": "step-rest",
+            "type": "rest",
+            "label": "Rest",
+            "durationSeconds": 15,
+            "speech": "Rest and get ready for the next movement."
+          }
+        ]
+      },
+      {
+        "id": "side-steps",
+        "name": "Side Step Touch",
+        "instructions": "Step to one side and bring the other foot to meet it, then go the other way.",
+        "phases": [
+          {
+            "id": "side-steps-work",
+            "type": "work",
+            "label": "Side step touch",
+            "durationSeconds": 45,
+            "speech": "Step to the side and touch, then step back the other way. Add your arms if it feels good."
+          }
+        ]
+      },
+      {
+        "id": "cool-down",
+        "name": "Cool Down Walk",
+        "instructions": "Slow your march down and let your breathing settle.",
+        "phases": [
+          {
+            "id": "cool-down-walk",
+            "type": "work",
+            "label": "Slow march",
+            "durationSeconds": 30,
+            "speech": "Slow your march right down. Breathe in through your nose and out through your mouth."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "schemaVersion": 1,
+    "id": "player-check",
+    "title": "Quick Player Check (Example)",
+    "description": "A 40-second routine with short phases for checking voice, transitions and controls.",
+    "sourceUrl": "",
+    "notes": "EXAMPLE ONLY. Not exercise guidance; it exists to test the timer and spoken cues quickly.",
+    "exercises": [
+      {
+        "id": "warm",
+        "name": "Arm Circles",
+        "instructions": "Small forward arm circles.",
+        "phases": [
+          {
+            "id": "warm-forward",
+            "type": "work",
+            "label": "Forward",
+            "durationSeconds": 12,
+            "speech": "Make small circles forward with both arms."
+          },
+          {
+            "id": "warm-back",
+            "type": "work",
+            "label": "Backward",
+            "durationSeconds": 10,
+            "speech": "Reverse direction."
+          }
+        ]
+      },
+      {
+        "id": "breath",
+        "name": "Breathe",
+        "instructions": "Stand still and breathe slowly.",
+        "phases": [
+          {
+            "id": "breath-rest",
+            "type": "rest",
+            "label": "Breathe",
+            "durationSeconds": 8,
+            "speech": "Relax your arms and breathe."
+          },
+          {
+            "id": "breath-transition",
+            "type": "transition",
+            "label": "Get set",
+            "durationSeconds": 4,
+            "speech": "Stand tall."
+          },
+          {
+            "id": "breath-reach",
+            "type": "work",
+            "label": "Reach up",
+            "durationSeconds": 6,
+            "speech": "Reach both arms overhead."
+          }
+        ]
+      }
+    ]
+  }
+]
