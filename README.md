@@ -87,6 +87,18 @@ Priorities: **phase introduction / repeat (3) > "Next up" warning (2) > 3-2-1 co
 
 **The session auto-pauses when the page is hidden** (tab switch, app switch, and on most phones, screen lock). When you come back, it says why it paused and waits for **Resume**. The app never claims that you were coached while it was hidden.
 
+### Choosing a voice
+
+**Session settings → Voice** lists the device's English voices. Premium voices come first, then Enhanced, then on-device ones. Voices that need the internet are marked "online". Apple's novelty voices (Bubbles, Zarvox and so on) are hidden. **Test voice** uses the voice you picked.
+
+For a natural-sounding voice on iPhone:
+
+1. Open Settings → Accessibility → Spoken Content → Voices → English.
+2. Download a **Premium** voice, or **Enhanced** if there is no Premium one. These are large downloads, so use Wi-Fi.
+3. Reload the app and pick that voice.
+
+Every iPhone browser uses the same engine as Safari, so it gets the same voices.
+
 ### Screen wake lock
 
 If the Wake Lock API is available and the setting is on, the app requests a screen lock when the session starts or resumes. It releases the lock on pause, end, completion or when the page is hidden. Playback does not depend on the wake lock. If the browser does not support it, the settings say so, and you can lengthen your screen auto-lock instead.
@@ -108,7 +120,7 @@ If the Wake Lock API is available and the setting is on, the app requests a scre
   - Editing a bundled workout saves a local copy with the same id. The local copy **overrides** the bundled one, so a new deploy never replaces your edits. To go back, use **Reset to bundled version** on the detail page (it asks first).
   - Deleting a bundled workout hides it. **Restore deleted examples** on the library page brings it back.
   - Unknown or corrupt stored data is **left untouched** and saving is disabled, with a warning. To change the stored shape later, add a migration in `MIGRATIONS` in `js/storage.js`. Do not overwrite old data.
-- `localStorage["workoutGuide.settings"]` holds voice, rate, get-ready seconds, warning, countdown and wake lock settings.
+- `localStorage["workoutGuide.settings"]` holds voice on/off, chosen voice (`voiceURI`, empty for the system default), rate, get-ready seconds, warning, countdown and wake lock settings.
 
 **Backup:** **Export all** (library) or **Export** (detail) downloads JSON. **Import JSON** checks the whole file and rejects it if any part is invalid, so a bad file never changes saved data. It asks before replacing workouts with the same id. Your data lives only in this browser on this device. Clearing site data deletes it.
 
@@ -165,7 +177,7 @@ All asset URLs are relative (`style.css`, `js/app.js`, `data/workouts.json`) and
 
 ## Testing status
 
-**Automated:** `npm test` runs 47 unit tests, all passing.
+**Automated:** `npm test`. The 47 original unit tests passed. Two voice-picker tests were added afterwards and have not been run yet.
 
 **Headless desktop Chrome 156 smoke test** (served under `/step-ladders/` to imitate Pages, with mobile viewport emulation). This test is not in the repo. All of these passed with no console errors:
 
@@ -190,7 +202,7 @@ Speech in this test was checked by recording calls to `speechSynthesis.speak`. A
 ## Known limitations
 
 - **No device QA yet.** See above.
-- No voice picker. The system default voice for `lang="en"` is used. Rate is adjustable from 0.75 to 1.25×. A saved rate does not depend on any particular voice.
+- The voice picker lists only voices that are installed on the device, and only English ones. If the saved voice is missing (another device, or the voice was deleted), the app uses the system default. Siri voices are usually not offered to web pages on iPhone. The picker has not been tried on a device yet.
 - Settings are global, not per workout. There is no per-session override of rest durations; to change one, edit the workout.
 - The session auto-pauses when the page is hidden. There is no option to keep timing in the background.
 - `confirm()` dialogs are used for destructive actions. They are plain but reliable and accessible.
@@ -200,4 +212,4 @@ Speech in this test was checked by recording calls to `speechSynthesis.speak`. A
 
 ## Future ideas (post-MVP)
 
-PWA/offline launch, haptic or tone cues, repeats/sides/loops, voice picker, per-session rest overrides.
+PWA/offline launch, haptic or tone cues, repeats/sides/loops, per-session rest overrides.
