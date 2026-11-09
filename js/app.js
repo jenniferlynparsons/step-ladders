@@ -364,7 +364,21 @@ function settingsPanel(onChange) {
   const test =
     speech.supported &&
     h('button', { type: 'button', onclick: () => speech.speak('This is how cues will sound.') }, 'Test voice');
-  voiceDependents.push(rate, ...(test ? [test] : []));
+  const voicePick =
+    speech.supported &&
+    h('select', { onchange: (e) => set({ voiceURI: e.target.value }) });
+  const fillVoices = () => {
+    const list = speech.voices();
+    voicePick.replaceChildren(
+      h('option', { value: '', selected: !list.some((v) => v.id === settings.voiceURI) }, 'System default'),
+      ...list.map((v) => h('option', { value: v.id, selected: v.id === settings.voiceURI }, v.label)),
+    );
+  };
+  if (voicePick) {
+    fillVoices();
+    speech.onVoicesChanged = fillVoices;
+  }
+  voiceDependents.push(rate, ...(test ? [test, voicePick] : []));
   syncVoice();
 
   return h(
@@ -377,6 +391,14 @@ function settingsPanel(onChange) {
       !speech.supported &&
         h('p', { class: 'note' }, 'Spoken cues are not available in this browser. Workouts still run with on-screen cues.'),
       check('voice', 'Voice cues'),
+      voicePick &&
+        h(
+          'label',
+          { class: 'field' },
+          'Voice',
+          voicePick,
+          h('span', { class: 'meta field-hint' }, 'For a natural voice on iPhone, download a Premium or Enhanced voice in Settings → Accessibility → Spoken Content → Voices, then pick it here.'),
+        ),
       h('label', { class: 'field' }, 'Speech rate ', rateOut, rate),
       check('warning', '“Next up” warning', ' 5 seconds before a change (phases of 10 s or more)'),
       check('countdown', '3-2-1 countdown', ' at the end of each phase'),
