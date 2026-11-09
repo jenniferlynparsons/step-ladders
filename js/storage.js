@@ -12,6 +12,7 @@ export const MAX_IMPORT_BYTES = 1_000_000;
 export const DEFAULT_SETTINGS = Object.freeze({
   voice: true,
   rate: 1,
+  voiceURI: '', // '' = system default
   prepSeconds: 3,
   warning: true,
   countdown: true,
@@ -165,6 +166,7 @@ export function normalizeSettings(s) {
   return {
     voice: bool(s.voice, d.voice),
     rate: Number.isFinite(rate) ? Math.min(1.25, Math.max(0.75, rate)) : d.rate,
+    voiceURI: typeof s.voiceURI === 'string' && s.voiceURI.length <= 300 ? s.voiceURI : d.voiceURI,
     prepSeconds: Number.isInteger(prep) ? Math.min(10, Math.max(0, prep)) : d.prepSeconds,
     warning: bool(s.warning, d.warning),
     countdown: bool(s.countdown, d.countdown),
