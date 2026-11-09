@@ -27,10 +27,16 @@ let player = null;
 let currentHash = location.hash;
 let suppressHashChange = false;
 
-function updateSettings(patch) {
-  settings = store.saveSettings({ ...settings, ...patch });
+function applySpeechSettings() {
   speech.setEnabled(settings.voice);
   speech.setRate(settings.rate);
+  speech.setVoice(settings.voiceURI);
+}
+applySpeechSettings();
+
+function updateSettings(patch) {
+  settings = store.saveSettings({ ...settings, ...patch });
+  applySpeechSettings();
   return settings;
 }
 

@@ -121,6 +121,7 @@ export function mountPlayer(container, { workout, settings, speech, autoStart, o
   function startSession() {
     speech.setEnabled(settings.voice);
     speech.setRate(settings.rate);
+    speech.setVoice(settings.voiceURI);
     engine = createPlayback({
       segments,
       prepMs: settings.prepSeconds * 1000,
