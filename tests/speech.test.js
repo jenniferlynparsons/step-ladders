@@ -110,3 +110,40 @@ test('rate is applied and clamped', () => {
   s.speak('y');
   assert.equal(synth.current.rate, 0.8);
 });
+
+function voiceSynth(voices) {
+  const { synth, Utterance } = mockSynth();
+  synth.getVoices = () => voices;
+  return { synth, Utterance };
+}
+
+const VOICES = [
+  { name: 'Samantha', lang: 'en-US', voiceURI: 'com.apple.voice.compact.en-US.Samantha', localService: true },
+  { name: 'Ava', lang: 'en-US', voiceURI: 'com.apple.voice.premium.en-US.Ava', localService: true },
+  { name: 'Daniel', lang: 'en-GB', voiceURI: 'com.apple.voice.enhanced.en-GB.Daniel', localService: true },
+  { name: 'Google US English', lang: 'en-US', voiceURI: 'Google US English', localService: false },
+  { name: 'Bubbles', lang: 'en-US', voiceURI: 'com.apple.speech.synthesis.voice.bubbles', localService: true },
+  { name: 'Amélie', lang: 'fr-CA', voiceURI: 'com.apple.voice.compact.fr-CA.Amelie', localService: true },
+];
+
+test('voice list: English only, no novelty voices, best quality first', () => {
+  const { synth, Utterance } = voiceSynth(VOICES);
+  const list = createSpeech({ synth, Utterance }).voices();
+  assert.deepEqual(
+    list.map((v) => v.label),
+    ['Ava (Premium) · en-US', 'Daniel (Enhanced) · en-GB', 'Samantha · en-US', 'Google US English · en-US · online'],
+  );
+});
+
+test('selected voice is used; a missing voice falls back to the default', () => {
+  const { synth, Utterance } = voiceSynth(VOICES);
+  const s = createSpeech({ synth, Utterance });
+  s.setVoice('com.apple.voice.enhanced.en-GB.Daniel');
+  s.speak('hi');
+  assert.equal(synth.current.voice.name, 'Daniel');
+  assert.equal(synth.current.lang, 'en-GB');
+  s.setVoice('uninstalled-voice');
+  s.speak('hi');
+  assert.equal(synth.current.voice, undefined);
+  assert.equal(synth.current.lang, 'en');
+});
